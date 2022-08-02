@@ -174,6 +174,13 @@ const drilling = [
     	{	name: "DRILLDOC", curves: [], checked: true},
       {	name: "N/A", curves: [], checked: true},
     ]
+  },
+  {
+  	name: "Directional",
+    tools: [
+    	{	name: "PCD-C", curves: [], checked: true},
+      {	name: "N/A", curves: [], checked: true},
+    ]
   }
 ];
 

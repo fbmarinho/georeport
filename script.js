@@ -1,5 +1,6 @@
 HTMLCollection.prototype.forEach = Array.prototype.forEach
 HTMLCollection.prototype.filter = Array.prototype.filter
+HTMLCollection.prototype.find = Array.prototype.find
 String.prototype.toNameFormat = function () {
   return this.replace(/-|\s+/g, '').toLowerCase()
 }
@@ -63,7 +64,6 @@ function createSelector(name, title, items, length=5, multiple=false){
       select.size = items.length > length ? items.length : length;
 
     items.forEach((item)=>{
-      console.log(item.name)
       var container = document.createElement("option");
       container.innerHTML = item.name;
       container.value = item.name.toNameFormat();
@@ -85,12 +85,20 @@ function createSelector(name, title, items, length=5, multiple=false){
 
 
 function getSavedData(){
-  const get = async (e) => {
+  const getString = async (e) => {
     var saved = await localStorage.getItem(e.name);
+    console.log(saved)
     e.value = saved ? saved : '';
   }
-  document.getElementsByTagName("input").forEach(get);
-  document.getElementsByTagName("select").forEach(get);
+  const getArray = async (e) => {
+    var saved = await localStorage.getItem(e.name).split("|");
+    console.log(saved)
+    if(saved.length>0){
+      saved.forEach(s=>e.options.find(c=>c.value == s).selected = true)
+    }
+  }
+  document.getElementsByTagName("input").forEach(getString);
+  document.getElementsByTagName("select").forEach(getArray);
 }
 
 
@@ -168,11 +176,17 @@ document.addEventListener("DOMContentLoaded", function() {
   document.getElementsByTagName("select").forEach(async (e) => {
     //Persist data when changed
     e.addEventListener("change",debounce(async (e)=>{
+      var na = e.target.options.find((o)=>o.value==="n/a");
+      if(na?.selected){
+        e.target.selectedIndex = -1;
+        na.selected = true;
+      }
+
       var values = [];
       var selected = e.target.options.filter((x)=>x.selected).map((e)=>values.push(e.value));
-      await localStorage.setItem(e.target.name, values.join());
+      await localStorage.setItem(e.target.name, values.join("|"));
       generateToolData();
-      //getSavedData();
+      getSavedData();
     }, 500));    
   });
 
