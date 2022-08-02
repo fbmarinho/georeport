@@ -1,23 +1,47 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Halliburton usefull links</title>
+  <title>GEOREPORT - M/LWD Tool information</title>
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.css">
   <link rel="stylesheet" href="style.css">
   </head>
+  <script type="text/javascript" src="data.js"></script>
   <script type="text/javascript" src="script.js"></script>
 <body>
-  <div>
-    <div class="header fields">
+    <span class="section title">Well info</span>
+    <div id="header" class="section">
       <div><span>ZSPO:</span> <input class="wellinfo" type="text" name="zspo" placeholder="ZSPO" /></div>
       <div><span>RIG:</span> <input class="wellinfo" type="text" name="rig" placeholder="NS99" /></div>
       <div><span>WELL:</span> <input class="wellinfo" type="text" name="well" placeholder="1-SDS-99-BRA" /></div>
       <div><span>FASE:</span> <input class="wellinfo" type="text" name="fase" placeholder="100" /></div>
       <div><span>RUN:</span> <input class="wellinfo" type="text" name="run" placeholder="100" /></div>
+      <div>
+        <span>TOOL OD:</span> 
+        <select class="wellinfo">
+          <option value="9.5" selected>9 1/2"</option>
+          <option value="8">8"</option>
+          <option value="6.75">6 3/4"</option>
+        </select>
+      </div>
     </div>
-  </div>
+
+    <span class="section title">Controller</span>
+    <div id="controller" class="section"></div>
+
+    <span class="section title">Formation Evaluation Sensors</span>
+    <div id="fedata" class="section"></div>
+
+    <span class="section title">Drilling Optimization Sensors</span>
+    <div id="drilling" class="section"></div>
+    
+    <span class="section title">Telemetry used</span>
+    <div id="telemetry" class="section"></div>
+
+
+    <span class="section title">Selected Tool information</span>
+    <div id="tooldata" class="section"></div>
 </body> 
 </body>
 </html>
